@@ -59,10 +59,6 @@ While deleting db - result app stopped working - We have 3 vote with result cat 
 We voted mutiple times but result app didn't worked & it remain in 50% each without showing count
 but we can see logs in worked node
 
-
-
 How to work result app -
 
-
-
-We deleted result app then after that results started reporting proper. We tried multiple with votes and all were correct
+We deleted result app then after that results started reporting proper. We tried multiple votes and all were reported in result pod .
