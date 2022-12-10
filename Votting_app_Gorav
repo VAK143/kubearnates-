@@ -1,0 +1,68 @@
+=============
+1. Voting app deletion
+
+kubectl delete po  vote
+Even through voting app deleting - functionality of voting app and results are not changed
+why
+because while we deleting the POD replica of that POD will take charge of all Voting app functionality
+
+In brief we can say - Application has no impact when voting app is deleted because replica of its take care
+
+=======================
+If we observe any impact in one POD creation and one POD deletion then
+We can create multiple replica by using below command as per our requirement, so that we can minimize or remove impact
+
+kubectl get rs
+kubectl scale rs POD name(voting app) --replicas=3
+above cmd have some mistake that is deleting replica
+
+kubectl get deploy
+If you see voting app deployment it say one only so if you create 3 replica then it will terminate other 2 as deployment  desired one only
+so we need to correct our cmd like below
+
+kubectl scale deploy vote --replica=3
+now check
+kubectl get pod
+-------------------------------------------------------------------------------------------------------
+2. Worker POD deletion
+This is the command used for deletion of Worker POD .
+kubectl delete po worker
+
+
+Observation
+======================
+Same here if we delete worker POD there is no impact application wise
+
+kubectl logs workerpod name (whatever the replica generated )
+
+it will shows connected to db and conneted to redsis
+you can see what ever we are voting, its capturing logs ( if you press CATS it will capture vote for 'a', if DOGS then 'b' )
+
+Observation - : Once we delete worker node there is no impact on application - we can vote and result will also shows properly. The only thing to note is worker node is not storing any data, whatever it collect from redsis it will push to db. The only thing will happen here the logs which were stored in worker nodes that will loss , new worker node replica  dont have older logs data it will only display the logs which came after replica creation
+
+Note:- ETCD never store data which is got deleted only thing it will display the POD name ( inside POD whatever logs that is gone). But it doesn't means data lost - data were not stored in worker - As earlier said it will pull data from redsis and push to dbserver. so whatever result will not effect as result app will pull data from db server.
+observation - after worker node deletion , replica created but restart count shows one
+
+
+
+--------------
+3. db POD deletion
+
+cat 67
+dog 33
+Vote = 3
+
+Observation - for db deletion
+
+While deleting db - result app stopped working - We have 3 vote with result cat 67% & dog 33%. Once db deleted --- its changed to 50% each also below side its stopped to show the count .
+
+We voted mutiple times but result app didn't worked & it remain in 50% each without showing count
+but we can see logs in worked node
+
+
+
+How to work result app -
+
+
+
+We deleted result app then after that results started reporting proper. We tried multiple with votes and all were correct
