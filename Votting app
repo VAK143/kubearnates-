@@ -34,7 +34,6 @@ When ever we are deleting the vode POD we see there is not differnece in the wor
 
 
 
-
 When we are deleting the worker POD the is no impact on the app . While the replica is created for the Worker POD is created but the logs for the previuos worker pod is not carried to the new one . They are lost 
 
 
