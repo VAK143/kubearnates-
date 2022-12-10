@@ -1,4 +1,4 @@
 Check the POD status 
 Check the POD acessability & the container accessiblity .
 check the yaml config which was used to create the pod 
-check for any humane error while exucting kubectl run command for the Pod .
+check for any humane error while exucting kubectl apply command for the Pod .
